@@ -202,8 +202,8 @@ class SignViewModel(
     }
 
     private fun formatCoins(coins: Coins): String {
-        val value = coins.amount.toLong() / 1000000000L.toDouble()
-        return CurrencyFormatter.format("TON", BigDecimal(value)).toString()
+        val value = coins.amount.value.toBigDecimal().movePointLeft(9).stripTrailingZeros()
+        return CurrencyFormatter.format("TON", value).toString()
     }
 
     private fun parseAddress(address: MsgAddressInt, bounceable: Boolean = true): String {
